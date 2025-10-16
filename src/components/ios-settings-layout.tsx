@@ -62,7 +62,7 @@ export function SettingsItem({ icon, label, value, status, onClick, showChevron 
   return (
     <button
       onClick={onClick}
-      className={`w-full flex items-center gap-3 px-4 py-3 transition-colors ${
+      className={`w-full flex items-center gap-3 px-4 py-2 transition-colors ${
         isCompromised 
           ? "bg-red-900/30 hover:bg-red-900/40" 
           : "hover:bg-white/5"
