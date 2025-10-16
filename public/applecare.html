@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>AppleCare+</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            height: 100dvh;
+            width: 100vw;
+            position: fixed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 430px;
+            margin: 0 auto;
+            padding: 12px;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .logo-card {
+            background: #1c1c1e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 14px 12px;
+            text-align: center;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 8px;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 2px;
+            letter-spacing: -0.3px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: #8e8e93;
+        }
+
+        .section {
+            background: #1c1c1e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            padding: 9px 14px;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .item:active {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .divider {
+            height: 0.5px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-left: 14px;
+        }
+
+        .compromised {
+            background: rgba(139, 0, 0, 0.3);
+        }
+
+        .compromised:active {
+            background: rgba(139, 0, 0, 0.4);
+        }
+
+        .compromised .divider {
+            background: rgba(139, 0, 0, 0.5);
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .icon img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .icon svg {
+            width: 100%;
+            height: 100%;
+            color: #8e8e93;
+        }
+
+        .label {
+            flex: 1;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .value {
+            font-size: 14px;
+            color: #8e8e93;
+        }
+
+        .compromised .label,
+        .compromised .value {
+            color: #ff453a;
+        }
+
+        .repair-button {
+            background: #ff3b30;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px;
+            width: 100%;
+            margin-top: auto;
+            cursor: pointer;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .repair-button:active {
+            background: #ff2d20;
+        }
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background: #f2f2f7;
+                color: #000;
+            }
+
+            .section, .logo-card {
+                background: #fff;
+                border-color: rgba(0, 0, 0, 0.1);
+            }
+
+            .subtitle {
+                color: #8e8e93;
+            }
+
+            .value {
+                color: #8e8e93;
+            }
+
+            .divider {
+                background: rgba(0, 0, 0, 0.1);
+            }
+
+            .compromised {
+                background: rgba(255, 59, 48, 0.1);
+            }
+
+            .compromised:active {
+                background: rgba(255, 59, 48, 0.15);
+            }
+
+            .compromised .divider {
+                background: rgba(255, 59, 48, 0.2);
+            }
+
+            .compromised .label,
+            .compromised .value {
+                color: #ff3b30;
+            }
+        }
+
+        /* iPhone specific optimizations */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                height: -webkit-fill-available;
+            }
+            .container {
+                height: -webkit-fill-available;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo Card -->
+        <div class="logo-card">
+            <div class="logo">
+                <img src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/rounded-in-photoretrica-2-1760545274220.png" alt="Apple Logo">
+            </div>
+            <div class="title">AppleCare+</div>
+            <div class="subtitle">Protection System</div>
+        </div>
+
+        <!-- Account Settings -->
+        <div class="section">
+            <div class="item">
+                <div class="label">Name, Phone Numbers, Email</div>
+            </div>
+            <div class="divider"></div>
+            <div class="item">
+                <div class="label">Password & Security</div>
+            </div>
+            <div class="divider"></div>
+            <div class="item">
+                <div class="label">Payment & Shipping</div>
+                <div class="value">Mastercard</div>
+            </div>
+            <div class="divider"></div>
+            <div class="item">
+                <div class="label">Subscriptions</div>
+            </div>
+        </div>
+
+        <!-- Compromised Services -->
+        <div class="section">
+            <div class="item compromised">
+                <div class="icon">
+                    <img src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/icloud-1760615999088.svg" alt="iCloud">
+                </div>
+                <div class="label">iCloud</div>
+                <div class="value">Compromised</div>
+            </div>
+            <div class="divider compromised"></div>
+            <div class="item compromised">
+                <div class="icon">
+                    <img src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/appstore-1760616001843.svg" alt="App Store">
+                </div>
+                <div class="label">Media & Purchases</div>
+                <div class="value">Compromised</div>
+            </div>
+            <div class="divider compromised"></div>
+            <div class="item compromised">
+                <div class="icon">
+                    <img src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/locator-1760616003709.svg" alt="Find My">
+                </div>
+                <div class="label">Find My</div>
+                <div class="value">Compromised</div>
+            </div>
+        </div>
+
+        <!-- iPhone Section -->
+        <div class="section">
+            <div class="item">
+                <div class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
+                        <path d="M12 18h.01"/>
+                    </svg>
+                </div>
+                <div class="label">iPhone</div>
+                <div class="value">This iPhone</div>
+            </div>
+        </div>
+
+        <!-- Repair Button -->
+        <button class="repair-button">Repair now</button>
+    </div>
+</body>
+</html>
