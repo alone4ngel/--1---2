@@ -1,7 +1,7 @@
 "use client"
 
 import { IOSSettingsLayout, SettingsCard, SettingsItem, SettingsSection } from "./ios-settings-layout"
-import { Cloud, ShoppingBag, MapPin, Smartphone } from "lucide-react"
+import { Smartphone } from "lucide-react"
 
 interface AppleCarePageProps {
   onBack?: () => void
@@ -49,8 +49,12 @@ export function AppleCarePage({ onBack }: AppleCarePageProps) {
       <SettingsSection className="mb-6">
         <SettingsItem
           icon={
-            <div className="w-7 h-7 rounded-md flex items-center justify-center">
-              <Cloud className="w-6 h-6 text-blue-500" />
+            <div className="w-7 h-7 flex items-center justify-center">
+              <img 
+                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/icloud-1760615999088.svg"
+                alt="iCloud"
+                className="w-7 h-7"
+              />
             </div>
           }
           label="iCloud"
@@ -60,8 +64,12 @@ export function AppleCarePage({ onBack }: AppleCarePageProps) {
         <div className="h-px bg-red-900/50" />
         <SettingsItem
           icon={
-            <div className="w-7 h-7 rounded-md flex items-center justify-center">
-              <ShoppingBag className="w-6 h-6 text-blue-500" />
+            <div className="w-7 h-7 flex items-center justify-center">
+              <img 
+                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/appstore-1760616001843.svg"
+                alt="App Store"
+                className="w-7 h-7"
+              />
             </div>
           }
           label="Media & Purchases"
@@ -71,8 +79,12 @@ export function AppleCarePage({ onBack }: AppleCarePageProps) {
         <div className="h-px bg-red-900/50" />
         <SettingsItem
           icon={
-            <div className="w-7 h-7 rounded-md flex items-center justify-center">
-              <MapPin className="w-6 h-6 text-green-500" />
+            <div className="w-7 h-7 flex items-center justify-center">
+              <img 
+                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/locator-1760616003709.svg"
+                alt="Find My"
+                className="w-7 h-7"
+              />
             </div>
           }
           label="Find My"
