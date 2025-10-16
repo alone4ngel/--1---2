@@ -1,7 +1,8 @@
 "use client"
 
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { ReactNode } from "react"
+import { cn } from "@/lib/utils"
 
 interface IOSSettingsLayoutProps {
   title: string
@@ -9,26 +10,30 @@ interface IOSSettingsLayoutProps {
   onBack?: () => void
 }
 
-export function IOSSettingsLayout({ title, children, onBack }: IOSSettingsLayoutProps) {
+export function IOSSettingsLayout({ children, title, onBack }: IOSSettingsLayoutProps) {
   return (
-    <div className="h-screen bg-black text-white overflow-hidden flex flex-col">
-      <div className="max-w-md mx-auto w-full flex flex-col h-full">
-        {/* Header */}
-        <div className="flex items-center gap-2 p-4 bg-black z-10 flex-shrink-0">
-          <button 
-            onClick={onBack}
-            className="flex items-center gap-1 text-blue-500 hover:text-blue-400 transition-colors"
-          >
-            <ChevronLeft className="w-5 h-5" />
-            <span className="text-[17px]">Settings</span>
-          </button>
-          <h1 className="text-[17px] font-semibold ml-auto">{title}</h1>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      {title && (
+        <div className="bg-card border-b border-border/50 sticky top-0 z-10 backdrop-blur-lg bg-opacity-90">
+          <div className="max-w-2xl mx-auto px-4 h-14 flex items-center">
+            {onBack && (
+              <button
+                onClick={onBack}
+                className="flex items-center text-blue-500 hover:text-blue-600 transition-colors -ml-2"
+              >
+                <ChevronLeft className="w-6 h-6" />
+                <span className="text-[17px]" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>Back</span>
+              </button>
+            )}
+            <h1 className="text-[17px] font-semibold absolute left-1/2 -translate-x-1/2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{title}</h1>
+          </div>
         </div>
+      )}
 
-        {/* Content */}
-        <div className="px-4 pb-8 overflow-y-auto flex-1">
-          {children}
-        </div>
+      {/* Content */}
+      <div className="max-w-2xl mx-auto p-4 pb-8">
+        {children}
       </div>
     </div>
   )
@@ -39,9 +44,9 @@ interface SettingsCardProps {
   className?: string
 }
 
-export function SettingsCard({ children, className = "" }: SettingsCardProps) {
+export function SettingsCard({ children, className }: SettingsCardProps) {
   return (
-    <div className={`bg-[#1c1c1e] rounded-xl overflow-hidden ${className}`}>
+    <div className={cn("bg-card border border-border/50 rounded-xl overflow-hidden shadow-sm", className)}>
       {children}
     </div>
   )
@@ -53,44 +58,46 @@ interface SettingsItemProps {
   value?: string
   status?: "off" | "compromised"
   onClick?: () => void
-  showChevron?: boolean
 }
 
-export function SettingsItem({ icon, label, value, status, onClick, showChevron = true }: SettingsItemProps) {
+export function SettingsItem({
+  icon,
+  label,
+  value,
+  status,
+  onClick
+}: SettingsItemProps) {
   const isCompromised = status === "compromised"
   
   return (
     <button
       onClick={onClick}
-      className={`w-full flex items-center gap-3 px-4 py-2 transition-colors ${
+      className={cn(
+        "w-full flex items-center gap-4 px-4 py-3.5 transition-colors",
         isCompromised 
-          ? "bg-red-900/30 hover:bg-red-900/40" 
-          : "hover:bg-white/5"
-      }`}
+          ? "bg-red-950/30 hover:bg-red-950/40" 
+          : "hover:bg-secondary/50",
+        onClick && "cursor-pointer"
+      )}
     >
-      {icon && (
-        <div className="flex-shrink-0 w-7 h-7 flex items-center justify-center">
-          {icon}
+      {icon && <div className="flex-shrink-0">{icon}</div>}
+      <div className="flex-1 text-left">
+        <div className={cn(
+          "text-[17px]",
+          isCompromised && "text-red-400"
+        )} style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+          {label}
+        </div>
+      </div>
+      {value && (
+        <div className={cn(
+          "text-[17px]",
+          isCompromised ? "text-red-400" : "text-muted-foreground"
+        )} style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+          {value}
         </div>
       )}
-      
-      <span className="flex-1 text-left text-[17px]">{label}</span>
-      
-      {value && (
-        <span className={`text-[17px] ${
-          isCompromised ? "text-red-500" : "text-gray-500"
-        }`}>
-          {value}
-        </span>
-      )}
-      
-      {status === "off" && (
-        <span className="text-[17px] text-gray-500">Off</span>
-      )}
-      
-      {showChevron && (
-        <ChevronLeft className="w-5 h-5 text-gray-500 rotate-180 flex-shrink-0" />
-      )}
+      {onClick && <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />}
     </button>
   )
 }
@@ -101,17 +108,10 @@ interface SettingsSectionProps {
   className?: string
 }
 
-export function SettingsSection({ title, children, className = "" }: SettingsSectionProps) {
+export function SettingsSection({ children, className }: SettingsSectionProps) {
   return (
-    <div className={className}>
-      {title && (
-        <h2 className="text-[13px] text-gray-500 uppercase font-medium px-4 mb-2 tracking-wide">
-          {title}
-        </h2>
-      )}
-      <SettingsCard>
-        {children}
-      </SettingsCard>
+    <div className={cn("bg-card border border-border/50 rounded-xl overflow-hidden shadow-sm", className)}>
+      {children}
     </div>
   )
 }
